@@ -1,0 +1,102 @@
+    <!-- POST component -->
+    <div class="row card mt-4 custom-card">
+        <!-- FEED HEADER -->
+        <div class="card-header row" style="margin-left: 0.1px;" >
+        <div class="col-2"><img class="image" src="graduated.png" alt="not found" /></div>
+        <div class="col-7 name"><span ng-model="name">{{singlePost.name}}</span></div>
+        <div class="dropdown col-3">
+        <button class="btn dp dropdown-toggle" style="box-shadow: none;" type="button" id="dropdownMenuButton"
+        data-bs-toggle="dropdown" aria-expanded="false">
+        </button>
+        <ul class="dropdown-menu drop" aria-labelledby="dropdownMenuButton">
+        <li ng-click="deleteFeed(data)"><a class="dropdown-item"><i
+            class="fas fa-trash-alt"></i> Delete</a></li>
+        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editModal"
+          ng-Click="setId(singlePost)"><i class="fas fa-edit"></i> {{ editMode ? 'Save'
+          : 'Edit' }}</a></li>
+        </ul>
+        </div>
+        </div>
+        <!-- FEED CONTENT -->
+        <div class="card-body">
+        <p id="content" class="card-text" ng-show="!editMode">{{singlePost.messg }}</p>
+        <input id="contentInput" class="card-text" ng-show="editMode" ng-model="editedContent" type="text">
+        </div>
+        <!-- options LIKE DISLIKE COMMENT SHARE -->
+        <div class="row card-header" style="margin-left: 0.1px;">
+        <ul class="nav nav-tabs card-header-tabs">
+        <!-- <div class="row"> -->
+        <div class="col-2">
+        <li class="nav-item nav" ng-click="incrementLike(singlePost)">
+        <a class="nav-link"><i class="fas fa-thumbs-up"></i> Like</a>
+        </li>
+        </div>
+        <div class="col-3">
+        <li class="nav-item nav" ng-click="decrementLike(singlePost)">
+        <a class="nav-link" ><i class="fas fa-thumbs-down"></i> Dislike</a>
+        </li>
+        </div>
+        <div class="col-4">
+        <li class="nav-item nav">
+        <a class="nav-link" ng-click="showCommentInput = true;"><i class="fas fa-comment"></i>
+          Comment</a>
+        </li>
+        </div>
+        <div class="col-3">
+        <li class="nav-item nav" style="float: right;">
+        <a class="nav-link"><i class="fas fa-share"></i> Share</a>
+        </li>
+        </div>
+        </ul>
+        </div>
+        <span style="padding-left: 1.5rem" ng-show="singlePost.likes>0">{{singlePost.likes}} likes   &nbsp;  {{singlePost.dislike}} dislikes</span>
+        <!-- comments section -->
+        <div class="row card-footer add-comment"  ng-show="showCommentInput" ng-hide="!showCommentInput">
+        <div class="col-8">
+        <input class="form-control inp" ng-model="singlePost.val" rows="3" placeholder="Add a comment" />
+        </div>
+        <div class="col-2">
+        <button class="btn btn-primary addCommentButton" style="width:100%"
+        ng-click=" showCommentInput = false; addComment(singlePost)">Add</button>
+        </div>
+        <div class="col-2">
+        <button class="btn btn-primary addCommentButton" style="width:100%"
+        ng-click=" showCommentInput = false; cancelAddComment(singlePost)">X</button>
+        </div>
+        </div>
+        <!-- list of comments -->
+        <ul>
+        <li class="list-comment" ng-repeat="singleComment in singlePost.comments | orderBy: 'created_at':true">
+        <div class="row">
+        <div class="col-9">
+        <p ng-show="!singleComment.editMode">{{singleComment.content }}</p>
+        <input style="width:100%" ng-show="singleComment.editMode" ng-model="singleComment.editedComment"
+          type="text">
+        </div>
+        <div class="dropdown col-3">
+        <button class="btn  dropdown-toggle dp" style="box-shadow: none;" type="button"
+          id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+        </button>
+        <ul class="dropdown-menu drop" aria-labelledby="dropdownMenuButton">
+          <li><a class="dropdown-item" 
+              ng-click="deleteComment(allPosts.indexOf(singlePost),singleComment)"><i
+                class="fas fa-trash-alt"></i> Delete</a></li>
+          <li><a class="dropdown-item" 
+              ng-click="singleComment.editMode=true; EditComment(singlePost,singleComment)"><i
+                class="fas fa-edit"></i> {{ j.editMode ? 'Save' : 'Edit' }}</a> </li>
+        </ul>
+        </div>
+        <div class="row comment-updation">
+        <div class="col-3"><a class="dropdown-item update" 
+            ng-click="Update(singleComment)" ng-click="singleComment.editMode=false"
+            ng-show="singleComment.editMode">Update</a> </div>
+        <div class="col-3"><a class="dropdown-item cancel" 
+            ng-click="Cancel(singleComment)" ng-show="singleComment.editMode"
+            ng-click="editMode=false">Cancel</a></div>
+        <div class="col-6"></div>
+        </div>
+        </li>
+        </ul>
+        
+        </div>
+        
