@@ -4,6 +4,16 @@
   .content {
     color: #000; 
   }
+  .navbar-brand {
+    padding-top: 0.3125rem;
+    padding-bottom: 0.3125rem;
+    margin-right: 1rem;
+    font-size: 1.25rem;
+    text-decoration: none;
+    white-space: nowrap;
+    font-weight: 700;
+    color: #666 !important;
+}
   .navbar {
     background: white;
     padding-left: 1rem;
@@ -153,4 +163,22 @@
 .dropdown-item{
   box-shadow: none;
   background-color: white;
+}
+.hover{
+  cursor:pointer;
+  border:none;
+}
+.posted{
+  font-size:0.8rem;
+}
+.nav-tabs .nav-link {
+  margin-bottom: -1px;
+  background: 0 0;
+  border: 1px solid transparent;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  border: none !important;
+}
+.btn-like{
+  font-size:0.8rem;
 }
