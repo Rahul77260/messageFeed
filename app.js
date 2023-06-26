@@ -221,17 +221,17 @@ $scope.CancelFeed=()=>{
 
 });
 
-// myApp.directive('postComponent', function() {
-//   return {
-//     restrict: 'EAC',
-//     scope: {
-//       singlePost: '=' 
-//       // Two-way binding for the data attribute
-//     },
-//     templateUrl: 'postComponent.html',
-//     controller: 'myCtr',
-//   };
-// });
+myApp.directive('postComponent', function() {
+  return {
+    restrict: 'EAC',
+    scope: {
+      singlePost: '=' 
+      // Two-way binding for the data attribute
+    },
+    templateUrl: 'postComponent.html',
+    controller: 'myCtr',
+  };
+});
 myApp.filter('timeAgo', ()=> {
   return function(singlePost) {
     console.log("postedtime",singlePost.posted);
